@@ -1,3 +1,5 @@
+import { Error } from "mongoose";
+
 const notFound = (req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);
   res.status(404);
@@ -15,7 +17,7 @@ const errorHendler = (err, req, res, next) => {
   }
 
   res.status(statusCode).json({
-    massage,
+    massage: err.massage,
     stack: process.env.NODE_ENV === "production" ? "🥮" : err.stack,
   });
 };
